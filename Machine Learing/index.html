@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090b24" />
+  <title>Student Wellbeing Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <main class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Student Wellbeing Lab home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>STUDENT <b>WELLBEING LAB</b></span>
+      </a>
+      <span class="top-tag"><i></i> PERSONAL WELLBEING CHECK-IN</span>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">YOUR DIGITAL WELLBEING, DECODED</p>
+      <h1>How's your digital<br><em>rhythm</em> treating you?</h1>
+      <p class="intro-copy">Answer a few questions about your habits, lifestyle, and student life. Our machine learning model will estimate your mental health score.</p>
+    </section>
+
+    <section class="workspace">
+      <form id="predictionForm" class="form-card" novalidate>
+        <div class="card-heading">
+          <div>
+            <p class="section-kicker">YOUR PROFILE</p>
+            <h2>Tell us about yourself</h2>
+          </div>
+          <span class="step-pill">01 <span>/ 01</span></span>
+        </div>
+
+        <div class="field-grid">
+          <label class="field">
+            <span>Age</span>
+            <input type="number" name="age" min="10" max="100" value="21" required />
+            <small>10–100 years</small>
+          </label>
+          <label class="field">
+            <span>Gender</span>
+            <select name="gender" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Country</span>
+            <select name="country" required>
+              <option>Pakistan</option><option>India</option><option>USA</option>
+              <option>Canada</option><option>Australia</option><option>UK</option>
+              <option>Germany</option><option>Mexico</option><option>Turkey</option>
+              <option>France</option><option>Other</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Academic level</span>
+            <select name="academic_level" required>
+              <option>Undergraduate</option><option>Graduate</option><option>High School</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="section-divider"><span>DAILY DIGITAL HABITS</span></div>
+
+        <div class="field-grid">
+          <label class="field">
+            <span>Most-used platform</span>
+            <select name="most_used_platform" required>
+              <option>Instagram</option><option>Facebook</option><option>LinkedIn</option>
+              <option>Snapchat</option><option>Twitter</option><option>YouTube</option>
+              <option>TikTok</option><option>LINE</option><option>KakaoTalk</option>
+              <option>VKontakte</option><option>WhatsApp</option><option>WeChat</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Main purpose</span>
+            <select name="purpose_of_use" required>
+              <option>Education</option><option>Networking</option>
+              <option>Entertainment</option><option>News</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="range-field">
+          <div class="range-label"><label for="usage">Average daily usage</label><output id="usageValue">7.0 hrs</output></div>
+          <input id="usage" type="range" name="avg_daily_usage_hours" min="0" max="24" step="0.5" value="7" />
+          <div class="range-scale"><span>0 hrs</span><span>24 hrs</span></div>
+        </div>
+
+        <div class="field-grid compact-grid">
+          <label class="field">
+            <span>Daily phone unlocks</span>
+            <input type="number" name="daily_unlocks" min="0" step="1" value="80" required />
+          </label>
+          <label class="field">
+            <span>Study hours per day</span>
+            <input type="number" name="study_hours" min="0" max="24" step="0.5" value="4" required />
+          </label>
+        </div>
+
+        <div class="section-divider"><span>LIFESTYLE & WELLBEING</span></div>
+
+        <div class="range-field">
+          <div class="range-label"><label for="activity">Physical activity</label><output id="activityValue">1.0 hrs</output></div>
+          <input id="activity" type="range" name="physical_activity_hours" min="0" max="24" step="0.5" value="1" />
+          <div class="range-scale"><span>0 hrs</span><span>24 hrs</span></div>
+        </div>
+
+        <div class="range-field">
+          <div class="range-label"><label for="sleep">Sleep per night</label><output id="sleepValue">7.0 hrs</output></div>
+          <input id="sleep" type="range" name="sleep_hours_per_night" min="0" max="24" step="0.5" value="7" />
+          <div class="range-scale"><span>0 hrs</span><span>24 hrs</span></div>
+        </div>
+
+        <label class="field full-field">
+          <span>Current stress level</span>
+          <select name="stress_level" required>
+            <option>Medium</option><option>Low</option><option>High</option><option>Very High</option>
+          </select>
+        </label>
+
+        <div id="errorBox" class="error-box" role="alert" aria-live="polite" hidden></div>
+        <button class="submit-button" id="submitButton" type="submit">
+          <span class="button-text">Predict my score</span>
+          <span class="button-arrow" aria-hidden="true">↗</span>
+          <span class="button-spinner" aria-hidden="true"></span>
+        </button>
+        <p class="privacy-note"><span>✦</span> Your responses are used only to generate this estimate.</p>
+      </form>
+
+      <aside class="result-column">
+        <section class="result-card" aria-live="polite">
+          <div class="result-topline"><span class="result-dot"></span> YOUR RESULT</div>
+          <div class="score-ring" id="scoreRing">
+            <div class="ring-inner">
+              <span class="score-number" id="scoreNumber">—</span>
+              <span class="score-out-of">OUT OF 10</span>
+            </div>
+          </div>
+          <p class="result-status" id="resultStatus">Your score will appear here</p>
+          <p class="result-description" id="resultDescription">Complete the check-in and select “Predict my score” to see your estimated result.</p>
+          <div class="result-foot"><span class="sparkle">✧</span> A moment for self-awareness</div>
+        </section>
+
+        <section class="info-card">
+          <div class="info-icon">✳</div>
+          <div>
+            <h3>A gentle reminder</h3>
+            <p>This score is a model-generated estimate, not a medical diagnosis. Your wellbeing is more than a number.</p>
+          </div>
+        </section>
+        <div class="side-caption"><span></span> BUILT FOR STUDENT WELLBEING</div>
+      </aside>
+    </section>
+
+    <footer>STUDENT WELLBEING LAB <span>•</span> DIGITAL HABITS & MENTAL HEALTH</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
